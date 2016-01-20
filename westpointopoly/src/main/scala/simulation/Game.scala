@@ -7,16 +7,18 @@ class Game {
 	var players = List.empty[String]
 
 	def showGame = {
-		println("+-------------+")
-		println("|_|_|_|_|_|_|_|")
-		println("|_|         |_|")
-		println("|_|         |_|")
-		println("|_|_ _ _ _ _|_|")
-		println("|_| | | | | |_|")
-		println("+-------------+")
+		var board = ""
+		board += "+-------------+\n"
+		board += "|_|_|_|_|_|_|_|\n"
+		board += "|_|         |_|\n"
+		board += "|_|         |_|\n"
+		board += "|_|_ _ _ _ _|_|\n"
+		board += "|_| | | | | |_|\n"
+		board += "+-------------+"
+		board
 	}
 
-	def listPlayers = println("Players: " + players.mkString(", "))
+	def listPlayers = "Players: " + players.mkString(", ")
 
 	def advanceTurn() = players = players.drop(1) :+ players.head
 
@@ -28,8 +30,8 @@ class Game {
 			println("[3] Advance order")
 			val choice = readInt()
 			choice match {
-				case 1 => showGame
-				case 2 => listPlayers
+				case 1 => println(showGame)
+				case 2 => println(listPlayers)
 				case 3 => advanceTurn()
 				case _ => sys.exit()
 			}
