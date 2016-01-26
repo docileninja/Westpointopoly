@@ -1,8 +1,8 @@
-package simulation
+package simulation.player
 
 import scala.collection.mutable.Queue
 
-class PlayerOrder extends Queue[Player] {
+class PlayerOrder() extends Queue[Player] {
     def toString = this.mkString(", ")
     def advance = this.enqueue(this.dequeue())
 }

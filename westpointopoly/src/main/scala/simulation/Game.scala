@@ -3,11 +3,13 @@ package simulation
 import scala.sys
 
 class Game {
-
-	val menu = Menu()
+	
+	val players = List("Adam", "Matt", "Peter", "Lisa", "Andrew")
+	val board = Board(players)
+	val menu = Menu(board)
 
 	def run() {
-		players = List("Adam", "Matt", "Peter", "Lisa", "Andrew")
+		
 		while (true) {
 			println("[1] Show game area")
 			println("[2] Show player order")

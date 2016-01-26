@@ -1,23 +1,11 @@
 package simulation
 
-class Menu {
-    private val players = PlayerOrder()
+import simulation.player.{Player}
 
-	def showGame = {
-		var board = ""
-		board += "+-------------+\n"
-		board += "|_|_|_|_|_|_|_|\n"
-		board += "|_|         |_|\n"
-		board += "|_|         |_|\n"
-		board += "|_|_ _ _ _ _|_|\n"
-		board += "|_| | | | | |_|\n"
-		board += "+-------------+"
-		board
-	}
+class Menu(board: Board) {
 
-	def listPlayers = "Players: " + players.toString
-
-	def advanceTurn() = players.advance()
+	
+	
 }
 
 object Menu {
