@@ -1,0 +1,42 @@
+package simulation.player
+
+import org.scalatest.{FunSpec, Matchers}
+import simulation.board.{Property, PropertyGroup}
+
+/**
+  * Created by adam on 1/26/16.
+  */
+class PlayerTest extends FunSpec with Matchers {
+
+  describe("Player holds information such as name, money, and properties") {
+
+    it("has a name and starting money") {
+      val player = Player("a")
+
+      player.name shouldBe "a"
+      player.money shouldBe 500
+    }
+
+    it("can be represented as a string") {
+      val player = Player("a")
+
+      player.name shouldBe "a"
+      player.money shouldBe 500
+      player.toString shouldBe "a ($500) at GO"
+    }
+
+    it("has properties") {
+      val player = Player("a")
+
+      player.properties shouldBe Set.empty[Property]
+
+      val propertyGroup = PropertyGroup("Restaurants", (0,0,0))
+      val property = Property("Grant Hall", 100, propertyGroup)
+      player.properties += property
+
+      player.properties shouldBe Set(property)
+    }
+
+  }
+
+}
