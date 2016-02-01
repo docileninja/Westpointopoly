@@ -29,6 +29,7 @@ class MenuTest extends FunSpec with Matchers {
           |
           |Kenny ($500) at GO
           |
+          |
           |""".stripMargin
       menu.showGame shouldBe expected
     }
