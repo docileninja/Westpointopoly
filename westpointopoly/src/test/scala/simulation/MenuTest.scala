@@ -33,15 +33,22 @@ class MenuTest extends FunSpec with Matchers {
       menu.showGame shouldBe expected
     }
 
-    it("can advance players") {
+    it("can show player order") {
       val board = new Board(List("Adam", "Kenny"))
       val menu = Menu(board)
 
       menu.listPlayers shouldBe "Players: Adam ($500) at GO, Kenny ($500) at GO"
     }
 
-    it("can show player order") {
+    it("can advance players") {
+      val board = new Board(List("Adam", "Kenny"))
+      val menu = Menu(board)
 
+      menu.listPlayers shouldBe "Players: Adam ($500) at GO, Kenny ($500) at GO"
+      menu.advanceTurn()
+      menu.listPlayers shouldBe "Players: Kenny ($500) at GO, Adam ($500) at GO"
+      menu.advanceTurn()
+      menu.listPlayers shouldBe "Players: Adam ($500) at GO, Kenny ($500) at GO"
     }
 
   }
