@@ -1,6 +1,7 @@
 package simulation
 
 import scala.sys
+import simulation.board.Board
 
 class Game {
 	
@@ -19,7 +20,7 @@ class Game {
 				case 1 => println(menu.showGame)
 				case 2 => println(menu.listPlayers)
 				case 3 => menu.advanceTurn()
-				case _ => sys.exit()
+				case _ => sys.exit(0)
 			}
 		}
 	}
