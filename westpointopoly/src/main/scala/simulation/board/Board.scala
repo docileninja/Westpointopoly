@@ -50,7 +50,7 @@ object Board {
   val messHall = Property("Mess Hall", 50, restaruants)
   val theFirstie = Property("The Firstie", 120, restaruants)
 
-  val arvin = Property("Arvin", 150, fitness)
+  val arvin = Property("Arvin", 650, fitness)
   val hayes = Property("Hayes Gymnasium", 100, fitness)
 
   val thayerHall = Property("Thayer Hall", 150, academics)

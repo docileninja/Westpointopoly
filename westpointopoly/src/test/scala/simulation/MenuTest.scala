@@ -57,12 +57,17 @@ class MenuTest extends FunSpec with Matchers {
       val board = new Board(List("P1", "P2", "P3", "P4"))
       val menu = Menu(board)
 
+      menu.initializeGame
+
       for (player <- board.players) {
         player.money shouldBe 500
         player.location shouldBe 0
         player.rollHistory.size shouldBe 0
         player.properties.size shouldBe 0
       }
+
+
+
     }
 
     it("can check for winner") {
@@ -74,6 +79,10 @@ class MenuTest extends FunSpec with Matchers {
 
       board.winner shouldBe Some("P1")
     }
+
+
+    // For the sake of testing we are fixing the rolls of the players IOT have all players land
+    // on the same space, making the game as short as possible.
 
     it("can do a move") {
       val board = new Board(List("P1", "P2", "P3", "P4"))
@@ -144,7 +153,7 @@ class MenuTest extends FunSpec with Matchers {
       val board = new Board(List("P1", "P2", "P3", "P4"))
       val menu = Menu(board)
 
-      val firstTurn =
+      val firstMove =
         """|+----+----+----+----+----+
           || GO | TB |  C | CS |  H |
           |+----+----+----+----+----+
@@ -171,6 +180,131 @@ class MenuTest extends FunSpec with Matchers {
           |P4 ($500) at GO
           |
           |""".stripMargin
+      val secondMove =
+        """|+----+----+----+----+----+
+          || GO | TB |  C | CS |  H |
+          |+----+----+----+----+----+
+          ||  A | P  Stores    | JH |
+          |+----+ h          E +----+
+          || HG | y          d | BH |
+          |+----+ s          u +----+
+          ||  T |  Restaurants | TH |
+          |+----+----+----+----+----+
+          || GH | TF | GH | MH | DCA|
+          |+----+----+----+----+----+
+          |Players: P3 ($500) at GO, P4 ($500) at GO, P1 ($460) at CS, P2 ($460) at CS
+          |
+          |P1 ($460) at CS
+          |Company Store - $80
+          |
+          |
+          |P2 ($460) at CS
+          |
+          |
+          |P3 ($500) at GO
+          |
+          |
+          |P4 ($500) at GO
+          |
+          |""".stripMargin
+      val thirdMove =
+        """|+----+----+----+----+----+
+          || GO | TB |  C | CS |  H |
+          |+----+----+----+----+----+
+          ||  A | P  Stores    | JH |
+          |+----+ h          E +----+
+          || HG | y          d | BH |
+          |+----+ s          u +----+
+          ||  T |  Restaurants | TH |
+          |+----+----+----+----+----+
+          || GH | TF | GH | MH | DCA|
+          |+----+----+----+----+----+
+          |Players: P4 ($500) at GO, P1 ($500) at CS, P2 ($460) at CS, P3 ($460) at CS
+          |
+          |P1 ($500) at CS
+          |Company Store - $80
+          |
+          |
+          |P2 ($460) at C
+          |
+          |
+          |P3 ($460) at CS
+          |
+          |
+          |P4 ($500) at GO
+          |
+          |""".stripMargin
+      val fourthMove =
+        """|+----+----+----+----+----+
+          || GO | TB |  C | CS |  H |
+          |+----+----+----+----+----+
+          ||  A | P  Stores    | JH |
+          |+----+ h          E +----+
+          || HG | y          d | BH |
+          |+----+ s          u +----+
+          ||  T |  Restaurants | TH |
+          |+----+----+----+----+----+
+          || GH | TF | GH | MH | DCA|
+          |+----+----+----+----+----+
+          |Players: P1 ($540) at CS, P2 ($460) at CS, P3 ($460) at CS, P4 ($460) at CS
+          |
+          |P1 ($540) at CS
+          |Company Store - $80
+          |
+          |
+          |P2 ($460) at CS
+          |
+          |
+          |P3 ($460) at CS
+          |
+          |
+          |P4 ($460) at CS
+          |
+          |""".stripMargin
+
+      menu.doMove()
+      menu.showGame shouldBe firstMove
+      menu.doMove()
+      menu.showGame shouldBe secondMove
+      menu.doMove()
+      menu.showGame shouldBe thirdMove
+      menu.doMove()
+      menu.showGame shouldBe fourthMove
+
+    }
+
+    it("can do a game") {
+      val board = new Board(List("P1", "P2", "P3", "P4"))
+      val menu = Menu(board)
+
+      val firstTurn =
+        """|+----+----+----+----+----+
+          || GO | TB |  C | CS |  H |
+          |+----+----+----+----+----+
+          ||  A | P  Stores    | JH |
+          |+----+ h          E +----+
+          || HG | y          d | BH |
+          |+----+ s          u +----+
+          ||  T |  Restaurants | TH |
+          |+----+----+----+----+----+
+          || GH | TF | GH | MH | DCA|
+          |+----+----+----+----+----+
+          |Players: P1 ($540) at CS, P2 ($460) at CS, P3 ($460) at CS, P4 ($460) at CS
+          |
+          |P1 ($540) at CS
+          |Company Store - $80
+          |
+          |
+          |P2 ($460) at CS
+          |
+          |
+          |P3 ($460) at CS
+          |
+          |
+          |P4 ($460) at CS
+          |
+          |""".stripMargin
+
       val secondTurn =
         """|+----+----+----+----+----+
           || GO | TB |  C | CS |  H |
@@ -183,22 +317,23 @@ class MenuTest extends FunSpec with Matchers {
           |+----+----+----+----+----+
           || GH | TF | GH | MH | DCA|
           |+----+----+----+----+----+
-          |Players: P3 ($500) at GO, P4 ($500) at GO, P1 ($420) at CS, P2 ($400) at C
+          |Players: P1 ($615) at TH, P2 ($385) at TH, P3 ($385) at TH, P4 ($385) at TH
           |
-          |P1 ($420) at CS
+          |P1 ($615) at TH
           |Company Store - $80
+          |Thayer Hall - $150
           |
           |
-          |P2 ($400) at C
-          |C-store - $100
+          |P2 ($385) at TH
           |
           |
-          |P3 ($500) at GO
+          |P3 ($385) at TH
           |
           |
-          |P4 ($500) at GO
+          |P4 ($385) at TH
           |
           |""".stripMargin
+
       val thirdTurn =
         """|+----+----+----+----+----+
           || GO | TB |  C | CS |  H |
@@ -211,65 +346,68 @@ class MenuTest extends FunSpec with Matchers {
           |+----+----+----+----+----+
           || GH | TF | GH | MH | DCA|
           |+----+----+----+----+----+
-          |Players: P4 ($500) at GO, P1 ($420) at CS, P2 ($400) at C, P3 ($460) at CS
+          |Players: P1 ($675) at TF, P2 ($325) at TF, P3 ($325) at TF, P4 ($325) at TF
           |
-          |P1 ($460) at CS
+          |P1 ($675) at TF
           |Company Store - $80
+          |Thayer Hall - $150
+          |The Firstie - $120
           |
           |
-          |P2 ($400) at C
-          |C-store - $100
+          |P2 ($325) at TF
           |
           |
-          |P3 ($460) at CS
+          |P3 ($325) at TF
           |
           |
-          |P4 ($500) at GO
+          |P4 ($325) at TF
           |
           |""".stripMargin
-      val fourthTurn =
-        """|+----+----+----+----+----+
-          || GO | TB |  C | CS |  H |
-          |+----+----+----+----+----+
-          ||  A | P  Stores    | JH |
-          |+----+ h          E +----+
-          || HG | y          d | BH |
-          |+----+ s          u +----+
-          ||  T |  Restaurants | TH |
-          |+----+----+----+----+----+
-          || GH | TF | GH | MH | DCA|
-          |+----+----+----+----+----+
-          |Players: P1 ($420) at CS, P2 ($400) at C, P3 ($460) at CS, P4 ($500) at H
-          |
-          |P1 ($460) at CS
-          |Company Store - $80
-          |
-          |
-          |P2 ($400) at C
-          |C-store - $100
-          |
-          |
-          |P3 ($460) at CS
-          |
-          |
-          |P4 ($500) at H
-          |
-          |""".stripMargin
-
-      menu.doTurn()
-      menu.showGame shouldBe firstTurn
-      menu.doTurn()
-      menu.showGame shouldBe secondTurn
-      menu.doTurn()
-      menu.showGame shouldBe thirdTurn
-      menu.doTurn()
-      menu.showGame shouldBe fourthTurn
-
     }
 
-    it("can do a game") {
+    val FourthTurn =
+      """|+----+----+----+----+----+
+        || GO | TB |  C | CS |  H |
+        |+----+----+----+----+----+
+        ||  A | P  Stores    | JH |
+        |+----+ h          E +----+
+        || HG | y          d | BH |
+        |+----+ s          u +----+
+        ||  T |  Restaurants | TH |
+        |+----+----+----+----+----+
+        || GH | TF | GH | MH | DCA|
+        |+----+----+----+----+----+
+        |Players: P1 ($15) at A, P2 (-$5) at A, P3 (-$5) at A, P4 (-$5) at A
+        |
+        |P1 ($15) at A
+        |Company Store - $80
+        |Thayer Hall - $150
+        |The Firstie - $120
+        |Arvin - $660
+        |
+        |
+        |P2 (-$5) at A
+        |
+        |
+        |P3 (-$5) at A
+        |
+        |
+        |P4 (-$5) at A
+        |
+        |""".stripMargin
 
-    }
+    menu.doTurn()
+    menu.showGame shouldBe firstTurn
+    menu.checkForWinner() shouldBe None
+    menu.doTurn()
+    menu.showGame shouldBe secondTurn
+    menu.checkForWinner() shouldBe None
+    menu.doTurn()
+    menu.showGame shouldBe thirdTurn
+    menu.checkForWinner() shouldBe None
+    menu.doTurn()
+    menu.showGame shouldBe fourthTurn
+    menu.checkForWinner() shouldBe Some("P1")
 
   }
 }
