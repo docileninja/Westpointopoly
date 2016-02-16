@@ -363,51 +363,52 @@ class MenuTest extends FunSpec with Matchers {
           |P4 ($325) at TF
           |
           |""".stripMargin
+    
+
+      val fourthTurn =
+        """|+----+----+----+----+----+
+          || GO | TB |  C | CS |  H |
+          |+----+----+----+----+----+
+          ||  A | P  Stores    | JH |
+          |+----+ h          E +----+
+          || HG | y          d | BH |
+          |+----+ s          u +----+
+          ||  T |  Restaurants | TH |
+          |+----+----+----+----+----+
+          || GH | TF | GH | MH | DCA|
+          |+----+----+----+----+----+
+          |Players: P1 ($15) at A, P2 (-$5) at A, P3 (-$5) at A, P4 (-$5) at A
+          |
+          |P1 ($15) at A
+          |Company Store - $80
+          |Thayer Hall - $150
+          |The Firstie - $120
+          |Arvin - $660
+          |
+          |
+          |P2 (-$5) at A
+          |
+          |
+          |P3 (-$5) at A
+          |
+          |
+          |P4 (-$5) at A
+          |
+          |""".stripMargin
+
+      menu.doTurn()
+      menu.showGame shouldBe firstTurn
+      menu.checkForWinner() shouldBe None
+      menu.doTurn()
+      menu.showGame shouldBe secondTurn
+      menu.checkForWinner() shouldBe None
+      menu.doTurn()
+      menu.showGame shouldBe thirdTurn
+      menu.checkForWinner() shouldBe None
+      menu.doTurn()
+      menu.showGame shouldBe fourthTurn
+      menu.checkForWinner() shouldBe Some("P1")
+
     }
-
-    val FourthTurn =
-      """|+----+----+----+----+----+
-        || GO | TB |  C | CS |  H |
-        |+----+----+----+----+----+
-        ||  A | P  Stores    | JH |
-        |+----+ h          E +----+
-        || HG | y          d | BH |
-        |+----+ s          u +----+
-        ||  T |  Restaurants | TH |
-        |+----+----+----+----+----+
-        || GH | TF | GH | MH | DCA|
-        |+----+----+----+----+----+
-        |Players: P1 ($15) at A, P2 (-$5) at A, P3 (-$5) at A, P4 (-$5) at A
-        |
-        |P1 ($15) at A
-        |Company Store - $80
-        |Thayer Hall - $150
-        |The Firstie - $120
-        |Arvin - $660
-        |
-        |
-        |P2 (-$5) at A
-        |
-        |
-        |P3 (-$5) at A
-        |
-        |
-        |P4 (-$5) at A
-        |
-        |""".stripMargin
-
-    menu.doTurn()
-    menu.showGame shouldBe firstTurn
-    menu.checkForWinner() shouldBe None
-    menu.doTurn()
-    menu.showGame shouldBe secondTurn
-    menu.checkForWinner() shouldBe None
-    menu.doTurn()
-    menu.showGame shouldBe thirdTurn
-    menu.checkForWinner() shouldBe None
-    menu.doTurn()
-    menu.showGame shouldBe fourthTurn
-    menu.checkForWinner() shouldBe Some("P1")
-
   }
 }

@@ -8,7 +8,7 @@ class Menu(board: Board) {
   def listPlayers = board.listPlayers
   def advanceTurn() = board.advanceTurn()
   def initializeGame() = ???
-  def checkForWinner()  = ???
+  def checkForWinner(): Option[String]  = ???
   def doMove() = ???
   def doTurn() = ???
 	
