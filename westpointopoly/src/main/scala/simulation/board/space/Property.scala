@@ -1,4 +1,4 @@
-package simulation.board
+package simulation.board.space
 
 import simulation.player.Player
 

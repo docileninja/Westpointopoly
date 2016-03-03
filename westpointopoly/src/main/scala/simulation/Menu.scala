@@ -3,15 +3,12 @@ package simulation
 import simulation.board.Board
 
 class Menu(board: Board) {
-
 	def showGame = board.showGame
   def listPlayers = board.listPlayers
   def advanceTurn() = board.advanceTurn()
-  def initializeGame() = ???
-  def checkForWinner(): Option[String]  = ???
-  def doMove() = ???
-  def doTurn() = ???
-	
+  def checkForWinner(): Option[String]  = board.winner
+  def doMove() = board.doMove()
+  def doTurn() = for (_ <- board.players) doMove()
 }
 
 object Menu {

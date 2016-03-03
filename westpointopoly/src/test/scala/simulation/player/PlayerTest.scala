@@ -1,7 +1,8 @@
 package simulation.player
 
 import org.scalatest.{FunSpec, Matchers}
-import simulation.board.{Property, PropertyGroup}
+import simulation.board.Board
+import simulation.board.space.{PropertyGroup, Property}
 
 /**
   * Created by adam on 1/26/16.
@@ -9,7 +10,7 @@ import simulation.board.{Property, PropertyGroup}
 class PlayerTest extends FunSpec with Matchers {
 
   describe("Player holds information such as name, money, and properties") {
-
+    implicit val board = Board()
     it("has a name and starting money") {
       val player = Player("a")
 

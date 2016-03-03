@@ -1,4 +1,4 @@
-package simulation.board
+package simulation.board.space
 
 import org.scalatest.{FunSpec, Matchers}
 

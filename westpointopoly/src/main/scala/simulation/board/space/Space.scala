@@ -1,4 +1,4 @@
-package simulation.board
+package simulation.board.space
 
 /**
   * Created by adam on 1/30/16.
