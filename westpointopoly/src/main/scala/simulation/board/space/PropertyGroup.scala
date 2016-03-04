@@ -1,5 +1,7 @@
 package simulation.board.space
 
-case class PropertyGroup(name: String, color: (Int, Int, Int)) {
+import java.awt.Color
+
+case class PropertyGroup(name: String, color: Color) {
     var properties = Set.empty[Property]
 }

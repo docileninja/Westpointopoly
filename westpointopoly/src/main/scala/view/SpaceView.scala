@@ -1,6 +1,6 @@
 package view
 
-import java.awt.Color
+import java.awt.{BasicStroke, Color}
 
 import controller.SpaceViewController
 import simulation.board.space.{Property, Space}
@@ -10,31 +10,28 @@ import scala.swing._
 /**
   * Created by x87039 on 3/3/2016.
   */
-class SpaceView(controller: SpaceViewController) extends Panel {
-  val (w, h) = (200, 200)
+class SpaceView(controller: SpaceViewController, dim: Int = 100) extends Panel {
+  var (w, h) = (dim, dim)
+  val barHeight = h/5
   preferredSize = new Dimension(w, h)
 
   override def paint(gr: Graphics2D) = {
     val decorator = controller.space match {
-      case property: Property => {
-        var s = ""
-        property.owner match {
-          case Some(player) => s = "Owned by " + player.name
-          case None => s = "No owner"
-        }
-        val (r, g, b) = property.group.color
-        gr.setColor(new Color(r, g, b))
-        s
-      }
-      case _ => {gr.setColor(Color.pink); ""}
+      case property: Property => s"$$${property.cost}"
+      case _ => ""
     }
+    implicit val g = gr
+    val space = controller.space
+    gr.setColor(new Color(205, 230, 208))
     gr.fillRect(0, 0, w, h)
+    gr.setColor(space.color)
+    gr.fillRect(0, 0, w, barHeight)
     gr.setColor(Color.black)
-    gr.setFont(new Font("Arial", 0, 15))
-    gr.drawString(controller.space.toString, 5, h/2)
-    gr.drawString(decorator, 5, h/2 - 20)
-    for ((player, i) <- controller.space.players.zipWithIndex) {
-      gr.drawString(player.toString, 5, h / 2 + 30 + i * 20)
+    gr.setStroke(new BasicStroke())
+    Draw.stringCenter(space.name, 15, w, barHeight + dim / 10)
+    Draw.stringCenter(decorator, 15, w, h - dim / 10)
+    for ((player, i) <- space.players.zipWithIndex) {
+      Draw.stringCenter(player.toString, 15, w, h / 2 + i * dim / 10)
     }
   }
 }

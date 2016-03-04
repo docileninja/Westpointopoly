@@ -1,15 +1,17 @@
 package simulation.board
 
+import java.awt.Color
+
 import simulation.board.space.{Space, PropertyGroup, Property}
 import simulation.player.strategy.DefaultStrategy
 import simulation.player.{Player, PlayerOrder}
 
 class Board(playerNames: Seq[String], dice: Dice = Dice()) {
 
-  val restaruants = PropertyGroup("Restaurants", (255, 0, 0))
-  val fitness = PropertyGroup("Halls of Iron", (128, 128, 128))
-  val academics = PropertyGroup("Academics", (0, 255, 0))
-  val stores = PropertyGroup("Stores", (0, 128, 128))
+  val restaruants = PropertyGroup("Restaurants", Color.red)
+  val fitness = PropertyGroup("Halls of Iron", Color.gray)
+  val academics = PropertyGroup("Academics", Color.green)
+  val stores = PropertyGroup("Stores", Color.yellow)
 
   val grantHall = Property("Grant Hall", 200, restaruants)
   val messHall = Property("Mess Hall", 50, restaruants)

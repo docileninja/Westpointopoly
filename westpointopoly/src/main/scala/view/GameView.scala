@@ -8,7 +8,7 @@ import BorderPanel.Position._
   * Created by x87039 on 3/3/2016.
   */
 class GameView(controller: GameViewController) extends MainFrame  {
-  preferredSize = new Dimension(1000, 1400)
+  preferredSize = new Dimension(500, 800)
   contents = new BorderPanel {
     layout += controller.boardViewController.view -> North
     layout += controller.playerViewController.view -> South

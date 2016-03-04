@@ -10,7 +10,7 @@ import scala.swing._
 class BoardView(controller: BoardViewController) extends GridPanel(5, 5) {
   def panel = new Panel {}
   def addNext(k: Int): Unit = {
-    val spaceView = new SpaceView(controller.children(k).asInstanceOf[SpaceViewController])
+    val spaceView = controller.children(k).asInstanceOf[SpaceViewController].view
     contents += spaceView
   }
   for (i <- 0 to 4) {
