@@ -4,7 +4,7 @@ import simulation.board.Board
 import simulation.board.space.Property
 import simulation.player.strategy.{DefaultStrategy, Strategy}
 
-case class Player(val name: String, strategy: Strategy = DefaultStrategy(), var money: Int = 500)(implicit board: Board = Board()) {
+case class Player(val name: String, var strategy: Strategy = DefaultStrategy(), var money: Int = 500)(implicit board: Board = Board()) {
   var properties = Set.empty[Property]
   var rollHistory = List.empty[(Int, Int)]
   var _location = 0
@@ -24,8 +24,10 @@ case class Player(val name: String, strategy: Strategy = DefaultStrategy(), var 
   }
 
   def move(roll: (Int, Int)) = {
+    currentSpace.players -= this
     val (d1, d2) = roll
     location += d1 + d2
+    currentSpace.players += this
     currentSpace match {
       case property: Property => {
         property.owner match {

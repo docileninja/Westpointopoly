@@ -67,6 +67,6 @@ class Board(playerNames: Seq[String], dice: Dice = Dice()) {
 }
 
 object Board {
-  def apply(playerNames: Seq[String]) = new Board(playerNames)
+  def apply(playerNames: Seq[String], dice: Dice = Dice()) = new Board(playerNames, dice)
   def apply() = new Board(Seq.empty[String])
 }

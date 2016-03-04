@@ -2,6 +2,8 @@ package simulation
 
 import org.scalatest.{FunSpec, Matchers}
 import simulation.board.{Dice, Board}
+import simulation.player.Player
+import simulation.player.strategy.{BalancedStrategy, StupidStrategy, AggressiveStrategy}
 
 /**
   * Created by adam on 1/26/16.
@@ -91,7 +93,7 @@ class MenuTest extends FunSpec with Matchers {
     // For the sake of testing we are fixing the rolls of the players IOT have all players land
     // on the same space, making the game as short as possible.
 
-    it("can do a move") {
+    it("can do a move - according to strategy") {
       val board = defaultBoard
       val menu = Menu(board)
 
@@ -398,6 +400,24 @@ class MenuTest extends FunSpec with Matchers {
       menu.showGame shouldBe fourthTurn
       menu.checkForWinner() shouldBe Some("P1")
 
+    }
+
+    it("can set strategy") {
+      val player = Player("P1")
+      val menu = Menu(Board())
+
+      player.strategy.name shouldBe "DefaultStrategy"
+      menu.setPlayerStrategy(player, AggressiveStrategy())
+      player.strategy.name shouldBe "AggressiveStrategy"
+      menu.setPlayerStrategy(player, StupidStrategy())
+      player.strategy.name shouldBe "StupidStrategy"
+      menu.setPlayerStrategy(player, BalancedStrategy())
+      player.strategy.name shouldBe "BalancedStrategy"
+    }
+
+    it("can show strategies") {
+      val menu = Menu(Board(List("P1", "P2")))
+      menu.showStrategies shouldBe "P1 - DefaultStrategy, P2 - DefaultStrategy"
     }
   }
 }

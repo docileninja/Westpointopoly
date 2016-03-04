@@ -7,7 +7,7 @@ import simulation.player.Player
 /**
   * Created by x87039 on 3/3/2016.
   */
-class DefaultStrategy(board: Board) extends Strategy(board) {
+class DefaultStrategy(board: Board = Board()) extends Strategy(board) {
   def willBuy(player: Player) = {
     player.currentSpace.asInstanceOf[Property].cost < player.money
   }

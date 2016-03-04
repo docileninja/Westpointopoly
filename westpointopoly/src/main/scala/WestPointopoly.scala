@@ -1,8 +1,8 @@
-import simulation.Game
+import controller.GameViewController
 
 object WestPointopoly {
 	def main(args: Array[String]) = {
-		val game = new Game()
-		game.run()
+		val gameViewController = new GameViewController()
+//		gameViewController.main()
 	}
 }
