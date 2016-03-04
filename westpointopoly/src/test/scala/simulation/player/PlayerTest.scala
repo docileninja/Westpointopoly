@@ -1,5 +1,7 @@
 package simulation.player
 
+import java.awt.Color
+
 import org.scalatest.{FunSpec, Matchers}
 import simulation.board.Board
 import simulation.board.space.{PropertyGroup, Property}
@@ -31,7 +33,7 @@ class PlayerTest extends FunSpec with Matchers {
 
       player.properties shouldBe Set.empty[Property]
 
-      val propertyGroup = PropertyGroup("Restaurants", (0,0,0))
+      val propertyGroup = PropertyGroup("Restaurants", Color.red)
       val property = Property("Grant Hall", 100, propertyGroup)
       player.properties += property
 

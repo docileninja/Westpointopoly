@@ -1,5 +1,7 @@
 package simulation.board.space
 
+import java.awt.Color
+
 import org.scalatest.{FunSpec, Matchers}
 
 /**
@@ -10,7 +12,7 @@ class PropertyTest extends FunSpec with Matchers {
   describe("Properties are owned by players and have a purchase price and rent. They also belong to a PropertyGroup.") {
 
     it("the purchase price must be twice the rent") {
-      val propertyGroup = PropertyGroup("Restaurants", (0,0,0))
+      val propertyGroup = PropertyGroup("Restaurants", Color.red)
       val property = Property("Grant Hall", 100, propertyGroup)
 
       property.name shouldBe "Grant Hall"
@@ -19,7 +21,7 @@ class PropertyTest extends FunSpec with Matchers {
     }
 
     it("can be represented as a string") {
-      val propertyGroup = PropertyGroup("Restaurants", (0,0,0))
+      val propertyGroup = PropertyGroup("Restaurants", Color.red)
       val property = Property("Grant Hall", 100, propertyGroup)
 
       property.name shouldBe "Grant Hall"
