@@ -9,7 +9,7 @@ import simulation.player.{Player, PlayerOrder}
 class Board(playerNames: Seq[String], dice: Dice = Dice()) {
 
   val restaruants = PropertyGroup("Restaurants", Color.red)
-  val fitness = PropertyGroup("Halls of Iron", Color.gray)
+  val fitness = PropertyGroup("Halls of Iron", Color.gray )
   val academics = PropertyGroup("Academics", Color.green)
   val stores = PropertyGroup("Stores", Color.yellow)
 
