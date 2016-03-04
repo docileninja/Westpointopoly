@@ -5,14 +5,11 @@ import simulation.player.strategy.DefaultStrategy
 import simulation.player.{Player, PlayerOrder}
 
 class Board(playerNames: Seq[String], dice: Dice = Dice()) {
-  implicit val board = this
-  val players = PlayerOrder(playerNames:_*)(board)(new DefaultStrategy(this))
 
   val restaruants = PropertyGroup("Restaurants", (255, 0, 0))
   val fitness = PropertyGroup("Halls of Iron", (128, 128, 128))
   val academics = PropertyGroup("Academics", (0, 255, 0))
   val stores = PropertyGroup("Stores", (0, 128, 128))
-  val auditoriums = PropertyGroup("Auditoriums", (0, 0, 255))
 
   val grantHall = Property("Grant Hall", 200, restaruants)
   val messHall = Property("Mess Hall", 50, restaruants)
@@ -35,6 +32,9 @@ class Board(playerNames: Seq[String], dice: Dice = Dice()) {
   val spaces = Array(Space("GO"), thayerBookstore, cadetStore, companyStore, Space("Hours")) ++
     Array(jeffersonHall, bartlettHall, thayerHall, Space("DCA")) ++
     Array(messHall, grantHall, theFirstie, Space("Go to Hours"), Space("Tasking"), hayes, arvin)
+
+  implicit val board = this
+  val players = PlayerOrder(playerNames:_*)(board)(new DefaultStrategy(this))
 
   def showGame = show + listPlayers + "\n\n" + listProperties
 

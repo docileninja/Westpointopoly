@@ -16,6 +16,7 @@ class GameViewController extends ViewController {
   val playerViewController = new PlayerViewController(board.players)
   children ++= List(boardViewController, playerViewController)
   val view = new GameView(this)
+  update()
 
   val menu = Menu(board)
 

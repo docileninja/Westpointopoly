@@ -11,7 +11,9 @@ case class Player(val name: String, var strategy: Strategy = DefaultStrategy(), 
     def location = _location
     def location_=(n: Int) = {
       if (n >= board.spaces.size) money += 200
+      currentSpace.players -= this
       _location = n % board.spaces.size
+      currentSpace.players += this
     }
   def currentSpace = board.spaces(location)
   def lastRoll = rollHistory.head
@@ -24,10 +26,8 @@ case class Player(val name: String, var strategy: Strategy = DefaultStrategy(), 
   }
 
   def move(roll: (Int, Int)) = {
-    currentSpace.players -= this
     val (d1, d2) = roll
     location += d1 + d2
-    currentSpace.players += this
     currentSpace match {
       case property: Property => {
         property.owner match {
@@ -49,4 +49,7 @@ case class Player(val name: String, var strategy: Strategy = DefaultStrategy(), 
     }
   }
   override def toString = s"$name ($$$money) at ${currentSpace.abbr}"
+
+  //hack
+  location = 0
 }
