@@ -26,7 +26,7 @@ class Board(playerNames: Seq[String], dice: Dice = Dice()) {
   val thayerBookstore = Property("Thayer Bookstore", 50, stores)
   val companyStore = Property("Company Store", 80, stores)
 
-  val propertyGroups = Set(restaruants, fitness, academics, stores, auditoriums)
+  val propertyGroups = Set(restaruants, fitness, academics, stores)
   val properties = Set(grantHall, messHall, theFirstie, arvin, hayes, thayerHall, bartlettHall, jeffersonHall, cadetStore, thayerBookstore, companyStore)
 
   val spaces = Array(Space("GO"), thayerBookstore, cadetStore, companyStore, Space("Hours")) ++

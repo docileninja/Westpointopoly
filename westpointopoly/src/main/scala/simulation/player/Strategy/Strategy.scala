@@ -8,4 +8,5 @@ import simulation.player.Player
   */
 abstract class Strategy(board: Board) {
   def willBuy(player: Player): Boolean
+  def name = this.getClass.getName
 }
