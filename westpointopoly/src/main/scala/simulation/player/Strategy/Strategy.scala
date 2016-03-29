@@ -3,10 +3,20 @@ package simulation.player.strategy
 import simulation.board.Board
 import simulation.player.Player
 
-/**
-  * Created by x87039 on 3/3/2016.
+/** A strategy for a player to play Westpointopoly by.
+  *
+  * @param board a board to reference to the strategy
   */
-abstract class Strategy(board: Board) {
+abstract class Strategy(var board: Board) {
+
+  /** Returns a decision for a player at the current point in the game.
+    *
+    * @param player a player making a decision
+    * @return a decision
+    */
   def willBuy(player: Player): Boolean
-  def name = this.getClass.getName
+
+  /** Returns the strategy name. */
+  def name = this.getClass.getSimpleName
+
 }
