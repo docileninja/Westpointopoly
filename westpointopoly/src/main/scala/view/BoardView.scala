@@ -11,6 +11,8 @@ import scala.swing._
   */
 class BoardView(controller: BoardViewController) extends GridPanel(5, 5) {
 
+  preferredSize = new Dimension(500, 500)
+
   /** "fixture" creating new panel instances */
   private def panel = new Panel {}
   private def addNext(k: Int): Unit = {

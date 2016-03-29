@@ -10,12 +10,12 @@ import BorderPanel.Position._
   * @param controller the view's controller
   */
 class GameView(controller: GameViewController) extends MainFrame  {
-  preferredSize = new Dimension(500, 800)
+  preferredSize = new Dimension(500, 700)
   resizable = false
   title = "Westpointopoly"
-  contents = new BorderPanel {
-    layout += controller.boardViewController.view -> North
-    layout += controller.playerViewController.view -> South
+  contents = new BoxPanel(Orientation.Vertical) {
+    contents += controller.boardViewController.view
+    contents += controller.playerViewController.view
   }
   menuBar = new MenuBar {
     contents += new Menu("Actions") {

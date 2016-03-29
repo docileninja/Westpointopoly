@@ -4,10 +4,13 @@ import simulation.board.Board
 import simulation.board.space.Property
 import simulation.player.Player
 
-/**
-  * Created by x87039 on 3/3/2016.
+/** A balanced strategy that considers property groups.
+  *
+  * @param board a board to reference to the strategy
   */
 class BalancedStrategy(board: Board = Board()) extends Strategy(board) {
+
+  /** Returns the decision to buy (considering property groups). */
   def willBuy(player: Player): Boolean = {
     val currentSpace = player.currentSpace.asInstanceOf[Property]
     if (player.money > currentSpace.cost){ //if a player has enough money to buy the property
@@ -19,8 +22,13 @@ class BalancedStrategy(board: Board = Board()) extends Strategy(board) {
     }
     else return false  //player cannot afford the property
   }
+
 }
 
+/** A factory for [[simulation.player.strategy.BalancedStrategy]]. */
 object BalancedStrategy {
+
+  /** Returns a balanced strategy for the given board. */
   def apply(board: Board = Board()) = new BalancedStrategy(board)
+
 }

@@ -10,7 +10,7 @@ import simulation.player.Player
 class StrategyTest extends FunSpec with Matchers {
 
   describe("Different strategies determine player behavior when landing on a space") {
-    val rolls = List((1,3),(0,1),(0,1),(0,2),(2,3),(1,1))
+    val rolls = List((1,4),(0,1),(0,1),(0,2),(2,3),(1,1))
 
     it("Has a Default Strategy that buys whenever it has enough money") {
       val player: Player = Player("D", money = 420)
@@ -30,70 +30,71 @@ class StrategyTest extends FunSpec with Matchers {
       board.doMove()
       player.properties shouldBe Set(board.jeffersonHall, board.thayerHall)
       board.doMove()
-      player.properties shouldBe Set(board.jeffersonHall, board.thayerHall, board.theFirstie)
+      player.properties shouldBe Set(board.jeffersonHall, board.thayerHall, board.hayes)
     }
 
     it("Has an Aggressive Strategy") {
-      implicit val board = Board(dice= Dice(rolls.toIterator))
-      val strategy = AggressiveStrategy()
-      val player = Player("A", strategy, money = 420)
-      board.players.enqueue(player)
+      val player: Player = Player("D", money = 420)
+      val players = List(player)
+      val board = Board(players, dice = Dice(rolls.toIterator))
+      val strategy = AggressiveStrategy(board)
+      player.strategy = strategy
+
       player.strategy shouldBe strategy
 
       board.doMove()
       board.players.current.properties shouldBe Set(board.jeffersonHall)
-      println(board.players.current.properties)
       board.doMove()
-      println(board.players.current.properties)
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall)
       board.doMove()
-      println(board.players.current.properties)
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall)
       board.doMove()
-      println(board.players.current.properties)
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall","Mess Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall","Mess Hall")
-      println(board.players.current.properties)
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall)
     }
 
     it("Has a Balanced Strategy") {
-      implicit val board = Board(dice= Dice(rolls.toIterator))
-      val strategy = BalancedStrategy()
-      val player = Player("B",strategy, money = 420)
-      board.players.enqueue(player)
+      val player: Player = Player("D", money = 420)
+      val players = List(player)
+      val board = Board(players, dice = Dice(rolls.toIterator))
+      val strategy = BalancedStrategy(board)
+      player.strategy = strategy
+
       player.strategy shouldBe strategy
 
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall")
+      player.properties shouldBe Set(board.jeffersonHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall)
     }
 
     it("Has a Stupid Strategy") {
-      implicit val board = Board(dice = Dice(rolls.toIterator))
-      val strategy = StupidStrategy()
-      val player = Player("S", strategy, money = 420)
-      board.players.enqueue(player)
+      val player: Player = Player("D", money = 420)
+      val players = List(player)
+      val board = Board(players, dice = Dice(rolls.toIterator))
+      val strategy = StupidStrategy(board)
+      player.strategy = strategy
+
       player.strategy shouldBe strategy
 
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall")
+      player.properties shouldBe Set(board.jeffersonHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall","Mess Hall")
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall, board.messHall)
       board.doMove()
-      player.properties shouldBe Set("Jefferson Hall","Bartlett Hall","Thayer Hall","Mess Hall","The Firstie")
-      player.money shouldBe -120
+      player.properties shouldBe Set(board.jeffersonHall, board.bartlettHall, board.thayerHall, board.messHall, board.hayes)
+      player.money shouldBe -100
     }
   }
 }

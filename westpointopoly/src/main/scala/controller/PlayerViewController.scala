@@ -7,7 +7,7 @@ import view.PlayerView
   *
   * @param players a player order to be displayed.
   */
-class PlayerViewController(players: PlayerOrder) extends ViewController {
+class PlayerViewController(val players: PlayerOrder) extends ViewController {
 
   val view = new PlayerView(this)
 
