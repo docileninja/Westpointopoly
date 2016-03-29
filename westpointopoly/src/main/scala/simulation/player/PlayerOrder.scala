@@ -32,10 +32,10 @@ object PlayerOrder {
   /** Returns a [[simulation.player.PlayerOrder]] with a list of players
     * with string of their names.
     */
-  def apply(players: String*)(implicit board: Board = Board()): Strategy => PlayerOrder = {
-    def func(strategy: Strategy = DefaultStrategy(board)): PlayerOrder = {
-      this(players.map { name: String => Player(name, strategy)(board)}:_*)
-    }
-    func(_)
-  }
+//  def apply(players: String*)(implicit board: Board = Board()): Strategy => PlayerOrder = {
+//    def func(strategy: Strategy = DefaultStrategy(board)): PlayerOrder = {
+//      this(players.map { name: String => Player(name, strategy)(board)}:_*)
+//    }
+//    func(_)
+//  }
 }

@@ -10,23 +10,20 @@ import simulation.player.strategy.DefaultStrategy
 class PlayerOrderTest extends FunSpec with Matchers {
 
   describe("PlayerOrder is a queue that keeps track of the player order and current player.") {
-    it("should create new players from names") {
-      val names = List("a", "b", "c")
-      val playerOrder = PlayerOrder(names:_*)(Board())(DefaultStrategy())
 
-      playerOrder.toString shouldBe "a ($500) at GO, b ($500) at GO, c ($500) at GO"
+    def players = {
+      val board = Board()
+      List("a", "b", "c").map(Player(_, board=board))
     }
 
     it("should also create from list of players") {
-      val players = List(Player("a"), Player("b"), Player("c"))
       val playerOrder = PlayerOrder(players:_*)
 
       playerOrder.toString shouldBe "a ($500) at GO, b ($500) at GO, c ($500) at GO"
     }
 
     it("should display the first player and advance players") {
-      val names = List("a", "b", "c")
-      val playerOrder = PlayerOrder(names:_*)(Board())(DefaultStrategy())
+      val playerOrder = PlayerOrder(players:_*)
 
       playerOrder.current.name shouldBe "a"
       playerOrder.advance()

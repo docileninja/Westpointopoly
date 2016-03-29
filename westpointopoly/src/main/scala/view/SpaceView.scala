@@ -31,10 +31,10 @@ class SpaceView(controller: SpaceViewController, dim: Int = 100) extends Panel {
     gr.fillRect(0, 0, w, barHeight)
     gr.setColor(Color.black)
     gr.setStroke(new BasicStroke())
-    Draw.stringCenter(space.name, 15, w, barHeight + dim / 10)
-    Draw.stringCenter(decorator, 15, w, h - dim / 10)
+    Draw.stringCenter(space.name, 11, w, barHeight + dim / 9)
+    Draw.stringCenter(decorator, 13, w, h - dim / 10)
     for ((player, i) <- space.players.zipWithIndex) {
-      Draw.stringCenter(player.toString, 15, w, h / 2 + i * dim / 10)
+      Draw.stringCenter(player.toString, 11, w, h / 2 + i * dim / 10)
     }
   }
 }

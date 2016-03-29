@@ -21,7 +21,8 @@ class PlayerTest extends FunSpec with Matchers {
     }
 
     it("can be represented as a string") {
-      val player = Player("a")
+      val board = Board()
+      val player = Player("a", board=board)
 
       player.name shouldBe "a"
       player.money shouldBe 500

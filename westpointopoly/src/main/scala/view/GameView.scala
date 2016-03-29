@@ -11,6 +11,8 @@ import BorderPanel.Position._
   */
 class GameView(controller: GameViewController) extends MainFrame  {
   preferredSize = new Dimension(500, 800)
+  resizable = false
+  title = "Westpointopoly"
   contents = new BorderPanel {
     layout += controller.boardViewController.view -> North
     layout += controller.playerViewController.view -> South
@@ -30,6 +32,18 @@ class GameView(controller: GameViewController) extends MainFrame  {
           }
         }.start
       })
+      contents += new MenuItem(Action("Show strategies") {
+        Dialog.showMessage(this, controller.menu.showStrategies, title="Strategies")
+      })
+    }
+    for (player <- controller.board.players) {
+      contents += new Menu(player.name) {
+        for (strategy <- controller.board.strategies) {
+          contents += new MenuItem(Action(strategy.name) {
+            controller.menu.setPlayerStrategy(player, strategy)
+          })
+        }
+      }
     }
   }
   this.visible = true

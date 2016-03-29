@@ -13,13 +13,16 @@ class MenuTest extends FunSpec with Matchers {
   def defaultBoard = {
     def forever[T](i: T): Stream[T] = i #:: forever(i)
     val rolls = (1,2) #:: (1,2) #:: (1,2) #:: (1,2) #:: forever((1,3))
-    new Board(List("P1", "P2", "P3", "P4"), Dice(rolls.toIterator))
+    val players = List("P1", "P2", "P3", "P4").map(Player(_))
+    new Board(players, Dice(rolls.toIterator))
   }
 
   describe("Menu commands the board through the game instance") {
 
+    def players = List("Adam", "Kenny").map(Player(_))
+
     it("can show the board") {
-      val board = new Board(List("Adam", "Kenny"))
+      val board = new Board(players)
       val menu = Menu(board)
       val expected =
         "+----+----+----+----+----+\n" +
@@ -45,14 +48,14 @@ class MenuTest extends FunSpec with Matchers {
     }
 
     it("can show player order") {
-      val board = new Board(List("Adam", "Kenny"))
+      val board = new Board(players)
       val menu = Menu(board)
 
       menu.listPlayers shouldBe "Players: Adam ($500) at GO, Kenny ($500) at GO"
     }
 
     it("can advance players") {
-      val board = new Board(List("Adam", "Kenny"))
+      val board = new Board(players)
       val menu = Menu(board)
 
       menu.listPlayers shouldBe "Players: Adam ($500) at GO, Kenny ($500) at GO"
@@ -63,7 +66,7 @@ class MenuTest extends FunSpec with Matchers {
     }
 
     it("can initialize the game") {
-      val board = new Board(List("P1", "P2", "P3", "P4"))
+      val board = new Board(List("P1", "P2", "P3", "P4").map(Player(_)))
       val menu = Menu(board)
 
 //      menu.initializeGame
@@ -80,11 +83,11 @@ class MenuTest extends FunSpec with Matchers {
     }
 
     it("can check for winner") {
-      val board = new Board(List("P1", "P2", "P3", "P4"))
+      val board = new Board(List("P1", "P2", "P3", "P4").map(Player(_)))
 
       board.winner shouldBe None
 
-      val winBoard = new Board(List("P1"))
+      val winBoard = new Board(List("P1").map(Player(_)))
 
       winBoard.winner shouldBe Some("P1")
     }
@@ -93,7 +96,7 @@ class MenuTest extends FunSpec with Matchers {
     // For the sake of testing we are fixing the rolls of the players IOT have all players land
     // on the same space, making the game as short as possible.
 
-    it("can do a move - according to strategy") {
+    it("can do a move") {
       val board = defaultBoard
       val menu = Menu(board)
 
@@ -279,6 +282,7 @@ class MenuTest extends FunSpec with Matchers {
 
     it("can do a game") {
       val board = defaultBoard
+      board.players.foreach(_.strategy = board.aggressiveStrategy)
       val menu = Menu(board)
 
       val firstTurn =
@@ -404,7 +408,8 @@ class MenuTest extends FunSpec with Matchers {
 
     it("can set strategy") {
       val player = Player("P1")
-      val menu = Menu(Board())
+      val board = Board(List(player))
+      val menu = Menu(board)
 
       player.strategy.name shouldBe "DefaultStrategy"
       menu.setPlayerStrategy(player, AggressiveStrategy())
@@ -416,7 +421,7 @@ class MenuTest extends FunSpec with Matchers {
     }
 
     it("can show strategies") {
-      val menu = Menu(Board(List("P1", "P2")))
+      val menu = Menu(Board(List("P1", "P2").map(Player(_))))
       menu.showStrategies shouldBe "P1 - DefaultStrategy, P2 - DefaultStrategy"
     }
   }

@@ -50,7 +50,7 @@ class Menu(board: Board) {
   }
 
   /** Returns a string representing the current strategies for the players. */
-  def showStrategies: String = ???
+  def showStrategies: String = board.players.map((p: Player) => s"${p.name} - ${p.strategy.name}").mkString(", ")
 
 }
 

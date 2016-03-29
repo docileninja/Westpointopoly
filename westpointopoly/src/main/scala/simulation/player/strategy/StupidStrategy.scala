@@ -11,5 +11,5 @@ class StupidStrategy(board: Board = Board()) extends Strategy(board) {
 }
 
 object StupidStrategy {
-  def apply(board: Board = Board()) = new StupidStrategy(board)
+  def apply(board: Board = null) = new StupidStrategy(board)
 }

@@ -2,6 +2,7 @@ package controller
 
 import simulation.Menu
 import simulation.board.{Dice, Board}
+import simulation.player.Player
 import view.{SpaceView, GameView}
 
 import scala.swing.BorderPanel
@@ -10,7 +11,7 @@ import BorderPanel.Position._
 /** A view controller to manage a game view. */
 class GameViewController extends ViewController {
 
-  val board = Board(List("P1", "P2", "P3", "P4"), Dice(3))
+  val board = Board(List("P1", "P2", "P3", "P4").map(Player(_)), Dice(3))
   val boardViewController = new BoardViewController(board)
   val playerViewController = new PlayerViewController(board.players)
   children ++= List(boardViewController, playerViewController)

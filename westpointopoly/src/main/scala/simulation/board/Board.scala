@@ -3,24 +3,24 @@ package simulation.board
 import java.awt.Color
 
 import simulation.board.space.{Space, PropertyGroup, Property}
-import simulation.player.strategy.DefaultStrategy
+import simulation.player.strategy._
 import simulation.player.{Player, PlayerOrder}
 
 /** A board that Westpointopoly is played on.
   *
-  * @param playerNames the names of players to be created
+  * @param _players the players to participate
   * @param dice a dice to be used for the rolls
   */
-class Board(playerNames: Seq[String], dice: Dice = Dice()) {
+class Board(_players: Seq[Player], dice: Dice = Dice()) {
 
-  val restaruants = PropertyGroup("Restaurants", Color.red)
+  val restaurants = PropertyGroup("Restaurants", Color.red)
   val fitness = PropertyGroup("Halls of Iron", Color.gray)
   val academics = PropertyGroup("Academics", Color.green)
   val stores = PropertyGroup("Stores", Color.yellow)
 
-  val grantHall = Property("Grant Hall", 200, restaruants)
-  val messHall = Property("Mess Hall", 50, restaruants)
-  val theFirstie = Property("The Firstie", 120, restaruants)
+  val grantHall = Property("Grant Hall", 200, restaurants)
+  val messHall = Property("Mess Hall", 50, restaurants)
+  val theFirstie = Property("The Firstie", 120, restaurants)
 
   val arvin = Property("Arvin", 660, fitness)
   val hayes = Property("Hayes Gymnasium", 100, fitness)
@@ -33,15 +33,24 @@ class Board(playerNames: Seq[String], dice: Dice = Dice()) {
   val thayerBookstore = Property("Thayer Bookstore", 50, stores)
   val companyStore = Property("Company Store", 80, stores)
 
-  val propertyGroups = Set(restaruants, fitness, academics, stores)
+  val propertyGroups = Set(restaurants, fitness, academics, stores)
   val properties = Set(grantHall, messHall, theFirstie, arvin, hayes, thayerHall, bartlettHall, jeffersonHall, cadetStore, thayerBookstore, companyStore)
 
   val spaces = Array(Space("GO"), thayerBookstore, cadetStore, companyStore, Space("Hours")) ++
-    Array(jeffersonHall, bartlettHall, thayerHall, Space("DCA")) ++
-    Array(messHall, grantHall, theFirstie, Space("Go to Hours"), Space("Tasking"), hayes, arvin)
+               Array(jeffersonHall, bartlettHall, thayerHall, Space("DCA"), messHall) ++
+               Array(grantHall, theFirstie, Space("Go to Hours"), Space("Tasking"), hayes, arvin)
+
+  val defaultStrategy = DefaultStrategy(this)
+  val aggressiveStrategy = AggressiveStrategy(this)
+  val stupidStrategy = StupidStrategy(this)
+  val balancedStrategy = BalancedStrategy(this)
+
+  val strategies = List(defaultStrategy, balancedStrategy, aggressiveStrategy, stupidStrategy)
 
   implicit val board = this // needed for the construction of new players
-  val players = PlayerOrder(playerNames:_*)(board)(new DefaultStrategy(this))
+  _players.foreach(_.board = this)
+  _players.foreach(_.location = 0)
+  val players = PlayerOrder(_players:_*)
 
   /** Returns a full string representation of board state including player info. */
   def showGame = show + listPlayers + "\n\n" + listProperties
@@ -87,16 +96,16 @@ object Board {
 
   /** Returns a new board based on the names and dice.
     *
-    * @param playerNames a list of player names to create
+    * @param players a list of player names to create
     * @param dice a dice for the board to use
     * @return a new board
     */
-  def apply(playerNames: Seq[String] = Seq.empty[String], dice: Dice = Dice()) = new Board(playerNames, dice)
+  def apply(players: Seq[Player] = Seq.empty[Player], dice: Dice = Dice()) = new Board(players, dice)
 
   /** Return a new board with no players.
     *
     * @return a new board
     */
-  def apply() = new Board(Seq.empty[String], Dice())
+  def apply() = new Board(Seq.empty[Player], Dice())
 
 }

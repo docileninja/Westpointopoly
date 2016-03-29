@@ -9,19 +9,20 @@ import simulation.player.strategy.{DefaultStrategy, Strategy}
   * @param name the player's name
   * @param strategy the player's strategy
   * @param money the player's starting money
-  * @param board implicit reference to the board
+  * @param board reference to the board
   */
-case class Player(val name: String, var strategy: Strategy = DefaultStrategy(), var money: Int = 500)(implicit board: Board = Board()) {
+case class Player(val name: String, var strategy: Strategy = DefaultStrategy(), var money: Int = 500, var board: Board = null) {
   var properties = Set.empty[Property]
   var rollHistory = List.empty[(Int, Int)]
   var _location = 0
-    def location = _location
-    def location_=(n: Int) = {
-      if (n >= board.spaces.size) money += 200
-      currentSpace.players -= this
-      _location = n % board.spaces.size
-      currentSpace.players += this
-    }
+
+  def location = _location
+  def location_=(n: Int) = {
+    if (n >= board.spaces.size) money += 200
+    currentSpace.players -= this
+    _location = n % board.spaces.size
+    currentSpace.players += this
+  }
 
   /** Returns the player's current space. */
   def currentSpace = board.spaces(location)
@@ -73,7 +74,4 @@ case class Player(val name: String, var strategy: Strategy = DefaultStrategy(), 
 
   /** Returns a string representation of the player. */
   override def toString = s"$name ($$$money) at ${currentSpace.abbr}"
-
-  //hack
-  location = 0
 }
