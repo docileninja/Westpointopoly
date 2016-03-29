@@ -4,8 +4,10 @@ import controller.GameViewController
 import scala.swing._
 import BorderPanel.Position._
 
-/**
-  * Created by x87039 on 3/3/2016.
+/** A parent view for all game information
+  *
+  * @constructor create a new game view with a controller.
+  * @param controller the view's controller
   */
 class GameView(controller: GameViewController) extends MainFrame  {
   preferredSize = new Dimension(500, 800)

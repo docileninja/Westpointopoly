@@ -7,14 +7,17 @@ import simulation.board.space.{Property, Space}
 
 import scala.swing._
 
-/**
-  * Created by x87039 on 3/3/2016.
+/** A view for a specific space's information
+  *
+  * @constructor create a new space view with a controller.
+  * @param controller the view's controller
   */
 class SpaceView(controller: SpaceViewController, dim: Int = 100) extends Panel {
   var (w, h) = (dim, dim)
   val barHeight = h/5
   preferredSize = new Dimension(w, h)
 
+  /** Renders the board space in the view. */
   override def paint(gr: Graphics2D) = {
     val decorator = controller.space match {
       case property: Property => s"$$${property.cost}"

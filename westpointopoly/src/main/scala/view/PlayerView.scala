@@ -1,10 +1,14 @@
 package view
 
+import controller.PlayerViewController
+
 import scala.swing._
 
-/**
-  * Created by x87039 on 3/3/2016.
+/** A view for player information
+  *
+  * @constructor create a new player view with a controller.
+  * @param controller the view's controller
   */
-class PlayerView extends Panel {
+class PlayerView(controller: PlayerViewController) extends Panel {
 
 }

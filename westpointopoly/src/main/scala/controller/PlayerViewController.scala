@@ -3,11 +3,12 @@ package controller
 import simulation.player.PlayerOrder
 import view.PlayerView
 
-/**
-  * Created by x87039 on 3/3/2016.
+/** A view controller to manage a player view.
+  *
+  * @param players a player order to be displayed.
   */
 class PlayerViewController(players: PlayerOrder) extends ViewController {
 
-  val view = new PlayerView()
+  val view = new PlayerView(this)
 
 }

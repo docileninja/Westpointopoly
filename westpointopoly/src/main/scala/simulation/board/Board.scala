@@ -6,6 +6,11 @@ import simulation.board.space.{Space, PropertyGroup, Property}
 import simulation.player.strategy.DefaultStrategy
 import simulation.player.{Player, PlayerOrder}
 
+/** A board that Westpointopoly is played on.
+  *
+  * @param playerNames the names of players to be created
+  * @param dice a dice to be used for the rolls
+  */
 class Board(playerNames: Seq[String], dice: Dice = Dice()) {
 
   val restaruants = PropertyGroup("Restaurants", Color.red)
@@ -35,11 +40,13 @@ class Board(playerNames: Seq[String], dice: Dice = Dice()) {
     Array(jeffersonHall, bartlettHall, thayerHall, Space("DCA")) ++
     Array(messHall, grantHall, theFirstie, Space("Go to Hours"), Space("Tasking"), hayes, arvin)
 
-  implicit val board = this
+  implicit val board = this // needed for the construction of new players
   val players = PlayerOrder(playerNames:_*)(board)(new DefaultStrategy(this))
 
+  /** Returns a full string representation of board state including player info. */
   def showGame = show + listPlayers + "\n\n" + listProperties
 
+  /** Returns a string representation of the board. */
   def show = {
     val ns = this.spaces.map(_.abbr)
     "+----+----+----+----+----+\n" +
@@ -54,13 +61,20 @@ class Board(playerNames: Seq[String], dice: Dice = Dice()) {
       "| %2s | %2s | %2s | %2s | %3s|\n".format(ns(12), ns(11), ns(10), ns(9), ns(8)) +
       "+----+----+----+----+----+\n"
   }
-	
+
+  /** Returns a string representation of the players. */
 	def listPlayers = "Players: " + players.toString
 
+  /** Returns a string representation of the players' properties. */
 	def listProperties = players.map { p: Player => p + "\n" + p.properties.mkString("\n") + "\n"}.mkString("\n")
 
+  /** Advances the players without moving. */
 	def advanceTurn() = players.advance()
+
+  /** Returns Some(winner) or None if there is no winner. */
   def winner: Option[String] = if (players.size == 1) Some(players.head.name) else None
+
+  /** Does a move for the current player. */
   def doMove() = {
     players.current.move(dice.roll)
     advanceTurn()
@@ -68,7 +82,21 @@ class Board(playerNames: Seq[String], dice: Dice = Dice()) {
 	
 }
 
+/** Factory for [[simulation.board.Board]]. */
 object Board {
-  def apply(playerNames: Seq[String], dice: Dice = Dice()) = new Board(playerNames, dice)
-  def apply() = new Board(Seq.empty[String])
+
+  /** Returns a new board based on the names and dice.
+    *
+    * @param playerNames a list of player names to create
+    * @param dice a dice for the board to use
+    * @return a new board
+    */
+  def apply(playerNames: Seq[String] = Seq.empty[String], dice: Dice = Dice()) = new Board(playerNames, dice)
+
+  /** Return a new board with no players.
+    *
+    * @return a new board
+    */
+  def apply() = new Board(Seq.empty[String], Dice())
+
 }

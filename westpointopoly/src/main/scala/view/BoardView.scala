@@ -4,12 +4,16 @@ import controller.{SpaceViewController, BoardViewController}
 
 import scala.swing._
 
-/**
-  * Created by x87039 on 3/3/2016.
+/** A parent view for board spaces
+  *
+  * @constructor create a new board view with a controller.
+  * @param controller the view's controller
   */
 class BoardView(controller: BoardViewController) extends GridPanel(5, 5) {
-  def panel = new Panel {}
-  def addNext(k: Int): Unit = {
+
+  /** "fixture" creating new panel instances */
+  private def panel = new Panel {}
+  private def addNext(k: Int): Unit = {
     val spaceView = controller.children(k).asInstanceOf[SpaceViewController].view
     contents += spaceView
   }
@@ -34,4 +38,5 @@ class BoardView(controller: BoardViewController) extends GridPanel(5, 5) {
   for (i <- 12 to 8 by -1) {
     addNext(i)
   }
+
 }

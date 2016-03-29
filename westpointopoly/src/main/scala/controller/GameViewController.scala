@@ -7,10 +7,9 @@ import view.{SpaceView, GameView}
 import scala.swing.BorderPanel
 import BorderPanel.Position._
 
-/**
-  * Created by x87039 on 3/3/2016.
-  */
+/** A view controller to manage a game view. */
 class GameViewController extends ViewController {
+
   val board = Board(List("P1", "P2", "P3", "P4"), Dice(3))
   val boardViewController = new BoardViewController(board)
   val playerViewController = new PlayerViewController(board.players)
@@ -20,16 +19,19 @@ class GameViewController extends ViewController {
 
   val menu = Menu(board)
 
+  /** Does one move. */
   def doMove(): Unit = {
     menu.doMove()
     update()
   }
 
+  /** Does one turn (one move for each player). */
   def doTurn(): Unit = {
     menu.doTurn()
     update()
   }
 
+  /** Does moves until the game is over. */
   def doGame(): Unit = {
     menu.doGame((Unit) => {
       update()
@@ -37,7 +39,9 @@ class GameViewController extends ViewController {
     })
   }
 
+  /** Redraws view. */
   override def updateView(): Unit = {
     view.repaint()
   }
+
 }
