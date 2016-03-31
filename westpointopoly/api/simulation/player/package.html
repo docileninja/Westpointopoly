@@ -1,0 +1,174 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <title>player - simulation.player</title>
+          <meta name="description" content="player - simulation.player" />
+          <meta name="keywords" content="player simulation.player" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      <link href="../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../lib/template.js"></script>
+      <script type="text/javascript" src="../../lib/tools.tooltip.js"></script>
+      
+      <script type="text/javascript">
+         if(top === self) {
+            var url = '../../index.html';
+            var hash = 'simulation.player.package';
+            var anchor = window.location.hash;
+            var anchor_opt = '';
+            if (anchor.length >= 1)
+              anchor_opt = '@' + anchor.substring(1);
+            window.location.href = url + '#' + hash + anchor_opt;
+         }
+   	  </script>
+    
+        </head>
+        <body class="value">
+      <div id="definition">
+        <img alt="Package" src="../../lib/package_big.png" />
+        <p id="owner"><a href="../package.html" class="extype" name="simulation">simulation</a></p>
+        <h1>player</h1><span class="permalink">
+      <a href="../../index.html#simulation.player.package" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <span class="name">player</span>
+      </span>
+      </h4>
+      
+          <div id="comment" class="fullcommenttop"></div>
+        
+
+      <div id="mbrsel">
+        <div id="textfilter"><span class="pre"></span><span class="input"><input id="mbrsel-input" type="text" accesskey="/" /></span><span class="post"></span></div>
+        
+        
+        <div id="visbl">
+            <span class="filtertype">Visibility</span>
+            <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+          </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="simulation.player.Player" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="PlayerextendsProductwithSerializable"></a>
+      <a id="Player:Player"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">case class</span>
+      </span>
+      <span class="symbol">
+        <a href="Player.html"><span class="name">Player</span></a><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="strategy">strategy: <a href="strategy/Strategy.html" class="extype" name="simulation.player.strategy.Strategy">Strategy</a> = <span class="symbol"><span class="name"><a href="../package.html">DefaultStrategy()</a></span></span></span>, <span name="money">money: <span class="extype" name="scala.Int">Int</span> = <span class="symbol">500</span></span>, <span name="board">board: <a href="../board/Board.html" class="extype" name="simulation.board.Board">Board</a> = <span class="symbol">null</span></span>)</span><span class="result"> extends <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#simulation.player.package@PlayerextendsProductwithSerializable" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A player for the Westpointopoly board
+</p><div class="fullcomment"><div class="comment cmt"><p>A player for the Westpointopoly board
+</p></div><dl class="paramcmts block"><dt class="param">name</dt><dd class="cmt"><p>the player's name</p></dd><dt class="param">strategy</dt><dd class="cmt"><p>the player's strategy</p></dd><dt class="param">money</dt><dd class="cmt"><p>the player's starting money</p></dd><dt class="param">board</dt><dd class="cmt"><p>reference to the board</p></dd></dl></div>
+    </li><li name="simulation.player.PlayerOrder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PlayerOrderextendsQueue[simulation.player.Player]"></a>
+      <a id="PlayerOrder:PlayerOrder"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">class</span>
+      </span>
+      <span class="symbol">
+        <a href="PlayerOrder.html"><span class="name">PlayerOrder</span></a><span class="result"> extends <span class="extype" name="scala.collection.mutable.Queue">Queue</span>[<a href="Player.html" class="extype" name="simulation.player.Player">Player</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#simulation.player.package@PlayerOrderextendsQueue[simulation.player.Player]" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">A player ordering that contains a queue of players.</p>
+    </li></ol>
+            </div>
+
+        
+
+        <div id="values" class="values members">
+              <h3>Value Members</h3>
+              <ol><li name="simulation.player.PlayerOrder" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="PlayerOrder"></a>
+      <a id="PlayerOrder:PlayerOrder"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="PlayerOrder$.html"><span class="name">PlayerOrder</span></a><span class="result"> extends <span class="extype" name="scala.Serializable">Serializable</span></span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#simulation.player.package@PlayerOrder" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      <p class="shortcomment cmt">Factory for <a href="PlayerOrder.html" class="extype" name="simulation.player.PlayerOrder">simulation.player.PlayerOrder</a>.</p>
+    </li><li name="simulation.player.strategy" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="strategy"></a>
+      <a id="strategy:strategy"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="strategy/package.html"><span class="name">strategy</span></a>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../index.html#simulation.player.package@strategy" title="Permalink" target="_top">
+        <img src="../../lib/permalink.png" alt="Permalink" />
+      </a>
+    </span>
+      
+    </li></ol>
+            </div>
+
+        
+
+        
+        </div>
+
+        <div id="inheritedMembers">
+        
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+
+
+    </body>
+      </html>
