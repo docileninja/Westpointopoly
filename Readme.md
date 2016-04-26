@@ -1,4 +1,5 @@
 # WestPointopoly
+Now with Meteor!
 
 ## Description
 
