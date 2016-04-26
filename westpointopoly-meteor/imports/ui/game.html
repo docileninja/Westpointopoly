@@ -1,0 +1,21 @@
+<template name='game'>
+	<header>
+		<h1>Westpointopoly</h1>
+	</header>
+
+	{{> loginButtons}}
+
+	{{> board}}
+
+	<br>
+
+	<p>Turn: {{turn}} ({{currentPlayer.name}}'s turn)</p>
+
+	{{#each players}}
+		{{name}}: {{money}} at {{location}}
+		<br>
+	{{/each}}
+
+	<button id='join'>Join Game</button>
+	<button id='move'>Move</button>
+</template>
